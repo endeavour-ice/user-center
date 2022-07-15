@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.websocket.Session;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -168,7 +169,7 @@ public class UserController {
      * 修改用户
      */
     @PostMapping("/update")
-    public B<Long> updateUserByID(@RequestBody User updateUser,HttpServletRequest request) {
+    public B<Long> updateUserByID(@RequestBody User updateUser, HttpServletRequest request) {
         if (request == null) {
             throw new GlobalException(ErrorCode.NO_LOGIN);
         }
