@@ -9,6 +9,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
  * <p>
@@ -76,4 +77,6 @@ public class User implements Serializable{
 
     @ApiModelProperty("修改时间")
     private LocalDateTime updateTime;
+
+
 }

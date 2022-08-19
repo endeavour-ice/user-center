@@ -13,8 +13,12 @@ public class ResultMessage<T> {
      * 是否是系统发送的数据
      */
     private boolean isSystem;
-
+    /**
+     * 发送的人
+     */
     private String fromName;
-
+    /**
+     * 发送的消息
+     */
     private T message;
 }

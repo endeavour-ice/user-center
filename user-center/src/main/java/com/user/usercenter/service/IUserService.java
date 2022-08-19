@@ -5,6 +5,7 @@ import com.user.usercenter.entity.User;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -16,6 +17,8 @@ import java.util.List;
  */
 public interface IUserService extends IService<User> {
 
+
+    User getLoginUser(HttpServletRequest request);
 
     /**
      * 用户注册
@@ -78,4 +81,8 @@ public interface IUserService extends IService<User> {
      * @return 4
      */
     long getUserByUpdateID(User loginUser, User updateUser);
+
+    List<User> friendUserName(String userID, String friendUserName);
+
+    Map<String, Object> selectPageIndexList(long current, long size);
 }

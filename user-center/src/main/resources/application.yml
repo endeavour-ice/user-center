@@ -32,7 +32,7 @@ server:
   address: 0.0.0.0
 mybatis-plus:
   mapper-locations: classpath:com/user/usercenter/mapper/xml/*.xml
-  #  日志
+#    日志
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #开启sql日志
   global-config:

@@ -11,14 +11,15 @@ import java.util.Map;
 /**
  * @author ice
  * @date 2022/7/14 11:01
+ * 将httpSession设置到 配置对象里去
  */
-@Component
+//@Component
 public class GetHttpSessionConfigurator extends ServerEndpointConfig.Configurator {
-    @Override
-    public void modifyHandshake(ServerEndpointConfig sec, HandshakeRequest request, HandshakeResponse response) {
-        HttpSession httpSession = (HttpSession) request.getHttpSession();
-        // 将httpseesion 存储到配置对象中
-        Map<String, Object> userProperties = sec.getUserProperties();
-        userProperties.put("HttpSession", httpSession);
-    }
+//    @Override
+//    public void modifyHandshake(ServerEndpointConfig sec, HandshakeRequest request, HandshakeResponse response) {
+//        HttpSession httpSession = (HttpSession) request.getHttpSession();
+//        // 将httpseesion 存储到配置对象中
+//        Map<String, Object> userProperties = sec.getUserProperties();
+//        userProperties.put("HttpSession", httpSession);
+//    }
 }

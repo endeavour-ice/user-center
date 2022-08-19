@@ -9,6 +9,8 @@ import lombok.Data;
  */
 @Data
 public class Message {
+    // 发送的人
     private String toName;
+    // 发送的消息
     private String message;
 }

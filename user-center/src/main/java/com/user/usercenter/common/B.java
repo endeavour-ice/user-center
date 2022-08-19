@@ -81,4 +81,5 @@ class B<T> implements Serializable {
     public static <T> B<T> error(ErrorCode errorCode, String message, String description) {
         return new B<>(errorCode, message, description);
     }
+
 }

@@ -15,6 +15,7 @@ import static com.user.usercenter.common.ErrorCode.SYSTEM_EXCEPTION;
  * @author ice
  * @date 2022/6/19 18:21
  */
+// 错误处理器,默认在这里
 @RestControllerAdvice
 @Log4j2
 public class GlobalExceptionHeader {

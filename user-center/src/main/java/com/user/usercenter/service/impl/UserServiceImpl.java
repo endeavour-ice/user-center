@@ -4,6 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -229,14 +230,32 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             }.getType());
             tempTagNameSet = Optional.ofNullable(tempTagNameSet).orElse(new HashSet<>());
             for (String tagName : tagNameList) {
-                if (!tempTagNameSet.contains(tagName)) {
-                    return false;
+                if (tempTagNameSet.contains(tagName)) {
+                    return true;
                 }
             }
-            return true;
+            return false;
         }).map(this::getSafetyUser).collect(Collectors.toList());
     }
 
+
+    @Override
+    public Map<String, Object> selectPageIndexList(long current, long size) {
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        Page<User> commentPage = baseMapper.selectPage(new Page<>(current, size), wrapper);
+        Map<String, Object> map = new HashMap<>();
+        List<User> userList = commentPage.getRecords();
+        // 通过stream 流的方式将列表里的每个user进行脱敏
+        userList = userList.parallelStream().peek(this::getSafetyUser).collect(Collectors.toList());
+        map.put("items", userList);
+        map.put("current", commentPage.getCurrent());
+        map.put("pages", commentPage.getPages());
+        map.put("size", commentPage.getSize());
+        map.put("total", commentPage.getTotal());
+        map.put("hasNext", commentPage.hasNext());
+        map.put("hasPrevious", commentPage.hasPrevious());
+        return map;
+    }
 
     /**
      * 根据用户修改资料
@@ -252,7 +271,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         if (isDelete != null) {
             throw new GlobalException(ErrorCode.SYSTEM_EXCEPTION, "SB");
         }
-        if (StringUtils.isEmpty(userId) && Integer.parseInt(userId)<=0) {
+        if (StringUtils.isEmpty(userId) && Integer.parseInt(userId) <= 0) {
             throw new GlobalException(ErrorCode.PARAMS_ERROR);
         }
 
@@ -276,5 +295,31 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     public boolean isAdmin(User user) {
 
         return user != null && Objects.equals(user.getRole(), ADMIN_ROLE);
+    }
+
+    @Override
+    public List<User> friendUserName(String userID, String friendUserName) {
+        QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
+        userQueryWrapper.like("user_account", friendUserName);
+        List<User> userList = baseMapper.selectList(userQueryWrapper);
+        if (userList.size() == 0) {
+            return null;
+        }
+        userList = userList.stream().filter(user -> !userID.equals(user.getId())).collect(Collectors.toList());
+        userList.forEach(this::getSafetyUser);
+        return userList;
+
+    }
+
+    @Override
+    public User getLoginUser(HttpServletRequest request) {
+        if (request == null) {
+            return null;
+        }
+        User user = (User) request.getSession().getAttribute(USER_LOGIN_STATE);
+        if (user == null) {
+            throw new GlobalException(ErrorCode.NO_LOGIN);
+        }
+        return user;
     }
 }

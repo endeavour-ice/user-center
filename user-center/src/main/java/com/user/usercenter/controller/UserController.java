@@ -10,15 +10,17 @@ import com.user.usercenter.entity.request.UserLoginRequest;
 import com.user.usercenter.entity.request.UserRegisterRequest;
 import com.user.usercenter.exception.GlobalException;
 import com.user.usercenter.service.IUserService;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.websocket.Session;
-import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import static com.user.usercenter.constant.UserConstant.USER_LOGIN_STATE;
@@ -33,16 +35,20 @@ import static com.user.usercenter.constant.UserConstant.USER_LOGIN_STATE;
  */
 @RestController
 @RequestMapping("/user")
-@CrossOrigin(origins = "http://localhost:4444", allowCredentials = "true")
-@Log4j2
+@CrossOrigin(origins = "http://localhost:7777", allowCredentials = "true")
+@Slf4j
 public class UserController {
 
     @Resource
     private IUserService userService;
 
+    @Resource
+    private RedisTemplate<String, Object> redisTemplate;
+
 
     // 用户注册
     @PostMapping("/Register")
+
     public B<Long> userRegister(@RequestBody UserRegisterRequest userRegister) {
         log.info("用户注册!!!!!!!!!!");
         if (userRegister == null) {
@@ -153,8 +159,8 @@ public class UserController {
 
 
     /**
-     *  ===================================================================================================
-     *  根据标签的搜索用户
+     * ===================================================================================================
+     * 根据标签的搜索用户
      */
     @GetMapping("/search/tags")
     public B<List<User>> getSearchUserTag(@RequestParam(required = false) List<String> tagNameList) {
@@ -182,5 +188,43 @@ public class UserController {
         }
         long id = userService.getUserByUpdateID(loginUser, updateUser);
         return B.ok(id);
+    }
+
+    /**
+     * 主页展示数据
+     */
+    @GetMapping("/recommend")
+    public B<Map<String, Object>> recommendUser(@RequestParam(required = false) long current, long size, HttpServletRequest request) {
+        User loginUser = userService.getLoginUser(request);
+        String redisKey = String.format("user:recommend:%s", loginUser.getId());
+        ValueOperations<String, Object> opsForValue = redisTemplate.opsForValue();
+        Map<String,Object> userMap = (Map<String,Object>) opsForValue.get(redisKey);
+        if (userMap != null) {
+            return B.ok(userMap);
+        }
+        Map<String,Object>map = userService.selectPageIndexList(current, size);
+        try {
+            redisTemplate.opsForValue().set(redisKey, map, 180, TimeUnit.SECONDS);
+        } catch (Exception e) {
+            log.error("缓存失败!!");
+            log.error(e.getMessage());
+        }
+        return B.ok(map);
+    }
+
+    // ========================================================================================
+    // 搜索用户
+    @GetMapping("/searchUserName")
+    public B<List<User>> searchUserName(@RequestParam(required = false) String friendUserName, HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute(USER_LOGIN_STATE);
+        if (user == null) {
+            throw new GlobalException(ErrorCode.NO_LOGIN);
+        }
+        String userId = user.getId();
+        List<User> friendList = userService.friendUserName(userId, friendUserName);
+        if (friendList.size() == 0) {
+            return B.error(ErrorCode.NULL_ERROR);
+        }
+        return B.ok(friendList);
     }
 }

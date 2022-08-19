@@ -6,9 +6,11 @@ import com.user.usercenter.service.impl.UserServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author ice
@@ -18,13 +20,12 @@ import java.util.List;
 public class UserServiceTest {
     @Autowired
     private IUserService userService;
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
     @Test
-    public void  TestSearchUserTag() {
-        List<String> list = Arrays.asList("python");
-        List<User> userList = userService.searchUserTag(list);
-        for (User user : userList) {
-            System.out.println("===================================");
-            System.out.println(user);
-        }
+    public void TestSearchUserTag() {
+        redisTemplate.opsForValue().set("1",2,3000, TimeUnit.MILLISECONDS);
+        Object o = redisTemplate.opsForValue().get("1");
+        System.out.println(o);
     }
 }
