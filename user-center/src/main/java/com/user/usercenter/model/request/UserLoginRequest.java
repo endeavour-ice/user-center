@@ -1,4 +1,4 @@
-package com.user.usercenter.model.request_;
+package com.user.usercenter.model.request;
 
 import lombok.Data;
 

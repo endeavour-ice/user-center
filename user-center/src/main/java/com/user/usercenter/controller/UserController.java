@@ -6,8 +6,8 @@ import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.user.usercenter.common.B;
 import com.user.usercenter.common.ErrorCode;
 import com.user.usercenter.model.domain.User;
-import com.user.usercenter.model.request_.UserLoginRequest;
-import com.user.usercenter.model.request_.UserRegisterRequest;
+import com.user.usercenter.model.request.UserLoginRequest;
+import com.user.usercenter.model.request.UserRegisterRequest;
 import com.user.usercenter.exception.GlobalException;
 import com.user.usercenter.service.IUserService;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +34,7 @@ import static com.user.usercenter.constant.UserConstant.USER_LOGIN_STATE;
  */
 @RestController
 @RequestMapping("/user")
-@CrossOrigin(origins = "http://localhost:7777", allowCredentials = "true")
+@CrossOrigin(origins = {"http://localhost:7777","http://127.0.0.1:7777"}, allowCredentials = "true")
 @Slf4j
 public class UserController {
 
@@ -47,7 +47,6 @@ public class UserController {
 
     // 用户注册
     @PostMapping("/Register")
-
     public B<Long> userRegister(@RequestBody UserRegisterRequest userRegister) {
         log.info("用户注册!!!!!!!!!!");
         if (userRegister == null) {
