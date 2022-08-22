@@ -1,6 +1,6 @@
 package com.user.usercenter.mapper;
 
-import com.user.usercenter.entity.User;
+import com.user.usercenter.model.domain.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 

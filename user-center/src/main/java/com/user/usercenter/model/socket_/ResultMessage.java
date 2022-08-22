@@ -1,4 +1,4 @@
-package com.user.usercenter.entity.socket_;
+package com.user.usercenter.model.socket_;
 
 import lombok.Data;
 

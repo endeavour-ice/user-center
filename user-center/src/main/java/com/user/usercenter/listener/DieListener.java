@@ -3,7 +3,7 @@ package com.user.usercenter.listener;
 import com.rabbitmq.client.Channel;
 
 import com.user.usercenter.config.mq.MqClient;
-import com.user.usercenter.entity.ChatRecord;
+import com.user.usercenter.model.domain.ChatRecord;
 import com.user.usercenter.service.IChatRecordService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;

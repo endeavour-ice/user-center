@@ -1,10 +1,8 @@
 package com.user.usercenter;
 
-import com.user.usercenter.entity.User;
-import com.user.usercenter.mapper.UserMapper;
+import com.user.usercenter.model.domain.User;
 
 import com.user.usercenter.service.IUserService;
-import org.apache.poi.ss.formula.functions.Count;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +10,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.StopWatch;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;

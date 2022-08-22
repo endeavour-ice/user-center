@@ -4,8 +4,7 @@ import com.google.gson.Gson;
 
 import com.user.usercenter.config.mq.MqClient;
 import com.user.usercenter.config.mq.RabbitService;
-import com.user.usercenter.entity.ChatRecord;
-import com.user.usercenter.service.IChatRecordService;
+import com.user.usercenter.model.domain.ChatRecord;
 import com.user.usercenter.utils.SpringUtil;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;

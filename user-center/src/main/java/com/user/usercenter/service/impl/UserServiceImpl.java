@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.user.usercenter.common.ErrorCode;
-import com.user.usercenter.entity.User;
+import com.user.usercenter.model.domain.User;
 import com.user.usercenter.exception.GlobalException;
 import com.user.usercenter.mapper.UserMapper;
 import com.user.usercenter.service.IUserService;

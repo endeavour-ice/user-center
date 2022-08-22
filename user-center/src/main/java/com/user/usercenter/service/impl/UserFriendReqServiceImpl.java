@@ -2,8 +2,8 @@ package com.user.usercenter.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.user.usercenter.common.ErrorCode;
-import com.user.usercenter.entity.User;
-import com.user.usercenter.entity.UserFriendReq;
+import com.user.usercenter.model.domain.User;
+import com.user.usercenter.model.domain.UserFriendReq;
 import com.user.usercenter.exception.GlobalException;
 import com.user.usercenter.mapper.UserFriendReqMapper;
 import com.user.usercenter.service.IUserFriendReqService;

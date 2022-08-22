@@ -1,13 +1,10 @@
 package com.user.usercenter.once;
-import java.time.LocalDateTime;
 
-import com.user.usercenter.entity.User;
+import com.user.usercenter.model.domain.User;
 import com.user.usercenter.mapper.UserMapper;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
 /**

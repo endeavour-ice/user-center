@@ -1,6 +1,6 @@
 package com.user.usercenter.mapper;
 
-import com.user.usercenter.entity.ChatRecord;
+import com.user.usercenter.model.domain.ChatRecord;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

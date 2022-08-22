@@ -1,11 +1,10 @@
 package com.user.usercenter.controller;
 
 import com.user.usercenter.common.B;
-import com.user.usercenter.entity.ChatRecord;
+import com.user.usercenter.model.domain.ChatRecord;
 import com.user.usercenter.service.IChatRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.stereotype.Controller;
 
 import java.util.List;
 

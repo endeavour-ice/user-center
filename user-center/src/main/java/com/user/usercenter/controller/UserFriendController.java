@@ -2,7 +2,7 @@ package com.user.usercenter.controller;
 
 import com.user.usercenter.common.B;
 import com.user.usercenter.common.ErrorCode;
-import com.user.usercenter.entity.User;
+import com.user.usercenter.model.domain.User;
 import com.user.usercenter.exception.GlobalException;
 import com.user.usercenter.service.IUserFriendReqService;
 import com.user.usercenter.service.IUserFriendService;
@@ -11,7 +11,6 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;

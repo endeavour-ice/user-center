@@ -1,7 +1,7 @@
 package com.user.usercenter.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.user.usercenter.entity.ChatRecord;
+import com.user.usercenter.model.domain.ChatRecord;
 import com.user.usercenter.mapper.ChatRecordMapper;
 import com.user.usercenter.service.IChatRecordService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

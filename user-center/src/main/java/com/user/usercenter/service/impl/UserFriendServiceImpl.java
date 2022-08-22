@@ -1,7 +1,7 @@
 package com.user.usercenter.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.user.usercenter.entity.UserFriend;
+import com.user.usercenter.model.domain.UserFriend;
 import com.user.usercenter.mapper.UserFriendMapper;
 import com.user.usercenter.service.IUserFriendService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

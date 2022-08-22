@@ -1,7 +1,7 @@
 package com.user.usercenter.netty;
 
 
-import com.user.usercenter.entity.ChatRecord;
+import com.user.usercenter.model.domain.ChatRecord;
 import lombok.Data;
 
 /**

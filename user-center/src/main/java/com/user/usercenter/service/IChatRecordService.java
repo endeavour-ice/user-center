@@ -1,8 +1,7 @@
 package com.user.usercenter.service;
 
-import com.user.usercenter.entity.ChatRecord;
+import com.user.usercenter.model.domain.ChatRecord;
 import com.baomidou.mybatisplus.extension.service.IService;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 

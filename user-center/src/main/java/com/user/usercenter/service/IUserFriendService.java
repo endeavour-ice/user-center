@@ -1,6 +1,6 @@
 package com.user.usercenter.service;
 
-import com.user.usercenter.entity.UserFriend;
+import com.user.usercenter.model.domain.UserFriend;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;

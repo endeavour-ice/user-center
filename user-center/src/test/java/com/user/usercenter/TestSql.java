@@ -1,6 +1,6 @@
 package com.user.usercenter;
 
-import com.user.usercenter.entity.User;
+import com.user.usercenter.model.domain.User;
 import com.user.usercenter.mapper.UserMapper;
 import com.user.usercenter.service.IUserService;
 import org.junit.jupiter.api.Assertions;

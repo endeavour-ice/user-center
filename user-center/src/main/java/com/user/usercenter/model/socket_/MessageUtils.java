@@ -1,4 +1,4 @@
-package com.user.usercenter.entity.socket_;
+package com.user.usercenter.model.socket_;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

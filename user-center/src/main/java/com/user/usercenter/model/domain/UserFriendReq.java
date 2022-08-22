@@ -1,4 +1,4 @@
-package com.user.usercenter.entity;
+package com.user.usercenter.model.domain;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;

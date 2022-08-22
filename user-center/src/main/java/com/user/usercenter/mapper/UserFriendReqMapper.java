@@ -1,6 +1,6 @@
 package com.user.usercenter.mapper;
 
-import com.user.usercenter.entity.UserFriendReq;
+import com.user.usercenter.model.domain.UserFriendReq;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

@@ -5,14 +5,13 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.user.usercenter.common.B;
 import com.user.usercenter.common.ErrorCode;
-import com.user.usercenter.entity.User;
-import com.user.usercenter.entity.request.UserLoginRequest;
-import com.user.usercenter.entity.request.UserRegisterRequest;
+import com.user.usercenter.model.domain.User;
+import com.user.usercenter.model.request_.UserLoginRequest;
+import com.user.usercenter.model.request_.UserRegisterRequest;
 import com.user.usercenter.exception.GlobalException;
 import com.user.usercenter.service.IUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
