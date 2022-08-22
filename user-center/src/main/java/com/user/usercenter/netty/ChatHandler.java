@@ -2,6 +2,8 @@ package com.user.usercenter.netty;
 
 import com.google.gson.Gson;
 
+import com.user.usercenter.config.mq.MqClient;
+import com.user.usercenter.config.mq.RabbitService;
 import com.user.usercenter.entity.ChatRecord;
 import com.user.usercenter.service.IChatRecordService;
 import com.user.usercenter.utils.SpringUtil;
@@ -35,7 +37,7 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
         Gson gson = new Gson();
         Message mess = gson.fromJson(message, Message.class);
         System.out.println(mess+"mess=======================================");
-        IChatRecordService recordService = SpringUtil.getBean(IChatRecordService.class);
+        RabbitService recordService = SpringUtil.getBean(RabbitService.class);
         switch (mess.getType().toString()) {
             case "0":
                 // 建立用户与通道的关联
@@ -53,11 +55,11 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
                 Channel channel= UserChannelMap.getFriendChannel(chatRecord.getFriendId());
                 if (channel != null) {
                     chatRecord.setHasRead(1);
-                    recordService.save(chatRecord);
+                    recordService.sendMessage(MqClient.NETTY_EXCHANGE,MqClient.NETTY_KEY,chatRecord);
                     channel.writeAndFlush(new TextWebSocketFrame(gson.toJson(mess)));
                 }else {
                     chatRecord.setHasRead(0);
-                    recordService.save(chatRecord);
+                    recordService.sendMessage(MqClient.NETTY_EXCHANGE,MqClient.NETTY_KEY,chatRecord);
                     // 不在线,暂时不发送
                     System.out.println("用户 "+chatRecord.getFriendId() +"不在线!!!!");
                 }

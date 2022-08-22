@@ -197,8 +197,7 @@ public class UserController {
     public B<Map<String, Object>> recommendUser(@RequestParam(required = false) long current, long size, HttpServletRequest request) {
         User loginUser = userService.getLoginUser(request);
         String redisKey = String.format("user:recommend:%s", loginUser.getId());
-        ValueOperations<String, Object> opsForValue = redisTemplate.opsForValue();
-        Map<String,Object> userMap = (Map<String,Object>) opsForValue.get(redisKey);
+        Map<String,Object> userMap = (Map<String,Object>)redisTemplate.opsForValue().get(redisKey);
         if (userMap != null) {
             return B.ok(userMap);
         }
